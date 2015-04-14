@@ -4,14 +4,18 @@
 	<meta charset=utf-8 />
 	<meta name="author" content="Tobias Hahn, hahn-tobias@live.de"/>
 	<title>RDF Reader Page</title>
-	<link rel="stylesheet" type="text/css" media="screen" href="css/master.css" />
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script type="text/javascript" src="rdfReader.js" > </script>
 	<!--[if IE]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 </head>
 <body>
 <h1>The RDF Reader</h1>
-	<div id="content"></div>			
+<div id="content">
+	<form name="rdfReader" action="#" method="GET">
+		<input type="button" id="readRdf" value="Read Rdf"></input>
+	</form>
+</div>
 </body>
 </html>
