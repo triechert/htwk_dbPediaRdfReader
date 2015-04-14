@@ -1,0 +1,27 @@
+.triple > div {
+	margin: 35px;
+	padding:10px;
+	border:solid 2px; 
+	border-radius:15px;
+	width:25%;
+
+}
+
+.triple {
+	margin-top:100px;
+	width:100%;
+}
+
+.subject{
+	background-color:orange;
+}
+
+.predicate {
+	background-color:grey;
+}
+
+.object {
+	background-color:blue;
+}
+
+
