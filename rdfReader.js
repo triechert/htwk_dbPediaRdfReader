@@ -1,4 +1,5 @@
-var localJson = "file://home/lkh/workspace/coding/project/semWeb/semI/htwk.json"
+var localJson = "file://home/lkh/workspace/coding/project/semWeb/semI/htwk.json";
+var loadingLabel = "<span class='loading'> loading ... </span>";
 jQuery(document).ready(function(){
 	$("#readRdf").click(function(){
 		readLocalJson();
@@ -7,5 +8,11 @@ jQuery(document).ready(function(){
 
 
 function readLocalJson(){
-	alert(localJson);	
+	jQuery.ajax({
+		beforeSend: clearRdf(),
+	});
+}
+
+function clearRdf(){
+	jQuery('#rdf').html(loadingLabel);
 }
