@@ -1,16 +1,29 @@
-var dbJsonDepr = "http://de.dbpedia.org/data/Hochschule_für_Technik,_Wirtschaft_und_Kultur_Leipzig.json";
+var dbJsonBase = "http://de.dbpedia.org/data/";
+var dbJsonSuffix = ".json"; 
 var dbJson = "";
 var subjectHeader; 
 var loadingLabel = "<span class='loading'> loading ... </span>";
 var contentRdf; 
 jQuery(document).ready(function(){
 	$("#readRdf").click(function(){
-		dbJson = jQuery('#rdfURI').val();
+		var input = jQuery('#rdfURI').val();
+ 
+		parseInput2DbJson(input); 	
 		readInputJson();
 	});
 	contentRdf = jQuery('#rdf');
 });
 
+
+function parseInput2DbJson(input){
+	var inputArr = input.split("/"); 
+	var inputLength = inputArr.length; 
+	if(inputArr[inputLength - 2] == "wiki"){
+		dbJson = dbJsonBase + inputArr[inputLength -1] + dbJsonSuffix; 
+	}else{
+		dbJson = input;
+	}
+}
 
 function readInputJson(){
 	storeSubjectName();
