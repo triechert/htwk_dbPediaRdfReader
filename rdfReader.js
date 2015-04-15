@@ -94,7 +94,7 @@ function createContentDivs(subject, predicate){
 	for(property in predicate){
 	 var pred = splitURI(property);
 	 var object = predicate[property][0];
-	 var val = setObjectValue(object);
+	 var val = setObjectValue(property, object);
 	 setLabel(pred, val); 
 	 retString += "<div class='subject'>" + splitURI(subject) + "</div>";
 	 retString += "<div class='predicate'>" + splitURI(property) + "</div>";	
@@ -108,11 +108,13 @@ function createContentDivs(subject, predicate){
  * Checks whether the objectType is uri or literal. 
  * If it is URI, it splits to get the identifier only. 
  * */
-function setObjectValue(object){
+function setObjectValue(predicate, object){
 	var val = object.value; 
-	 if(object.type == "uri"){
-	 	val = splitURI(val); 
-	 }
+
+	if(object.type == "uri"){
+		console.log(object);
+	 	val = splitURI(val);
+	}
 	 return val;
 }
 
