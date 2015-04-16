@@ -74,9 +74,8 @@ function isSubject(subject){
  * subject - predicate - object
  * */
 function createTripleDiv(rdfObject, property){
-	var tripleDiv = "<div class='triple'>"; 
+	var tripleDiv = ""; 
 	tripleDiv += createContentDivs(rdfObject,property); 
-	tripleDiv += "</div>";
 	return tripleDiv;
 }
 
@@ -96,10 +95,11 @@ function createContentDivs(subject, predicate){
 	 var object = predicate[property][0];
 	 var val = setObjectValue(property, object);
 	 setLabel(pred, val); 
+	 retString += "<div class='triple'>"; 
 	 retString += "<div class='subject'>" + splitURI(subject) + "</div>";
 	 retString += "<div class='predicate'>" + splitURI(property) + "</div>";	
-	 retString += "<div class='object'> " + val + "</div>";
-	 retString += "<br>";
+	 retString += "<div class='object "+object.type+" '> " + val + "</div>";
+	 retString += "</div>";
 	}
 	return retString; 
 }

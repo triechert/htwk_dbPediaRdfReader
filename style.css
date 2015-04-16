@@ -1,4 +1,5 @@
 .triple > div {
+	float:left;
 	margin: 35px;
 	padding:10px;
 	border:solid 2px; 
@@ -8,8 +9,9 @@
 }
 
 .triple {
-	margin-top:100px;
-	width:100%;
+	float: left;
+	margin-top:10px;
+	width:90%;
 }
 
 .subject{
@@ -20,8 +22,15 @@
 	background-color:grey;
 }
 
-.object {
+.uri {
+	color: white;
 	background-color:blue;
 }
+
+.literal {
+	color: black;
+	background-color:none;
+}
+
 
 
