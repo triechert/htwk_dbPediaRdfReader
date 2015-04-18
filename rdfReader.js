@@ -12,13 +12,14 @@ jQuery(document).ready(function(){
 		readInputJson();
 	});
 	contentRdf = jQuery('#rdf');
+
 });
 
 
 function parseInput2DbJson(input){
 	var inputArr = input.split("/"); 
 	var inputLength = inputArr.length; 
-	if(inputArr[inputLength - 2] == "wiki"){
+	if((inputArr[inputLength - 2] == "wiki")||(inputArr[inputLength - 2] == "resource")){
 		dbJson = dbJsonBase + inputArr[inputLength -1] + dbJsonSuffix; 
 	}else{
 		dbJson = input;
@@ -55,6 +56,7 @@ function parseRdf(json){
 	contentRdf.html("<h2>The contents are: </h2> ");
 
 	for(property in json){
+		console.log(property);
 		if(isSubject(property)){	
 		contentRdf.append(createTripleDiv(property, json[property]));
 		}
@@ -88,7 +90,7 @@ function createTripleDiv(rdfObject, property){
  * uses values to set a header 
  * */
 function createContentDivs(subject, predicate){
-	//console.log(predicate);	
+	
 	var retString = ""; 
 	for(property in predicate){
 	 var pred = splitURI(property);
@@ -97,8 +99,20 @@ function createContentDivs(subject, predicate){
 	 setLabel(pred, val); 
 	 retString += "<div class='triple'>"; 
 	 retString += "<div class='subject'>" + splitURI(subject) + "</div>";
-	 retString += "<div class='predicate'>" + splitURI(property) + "</div>";	
-	 retString += "<div class='object "+object.type+" '> " + val + "</div>";
+	 retString += "<div class='predicate'>" + niceuri(property) + "</div>";	
+	 retString += "<div class='object "+object.type+" '> "
+
+	 if (object.type=="uri") {
+		if($('#showfulluri').is(':checked')) {
+			retString += niceuri(object.value);
+		 } else {
+			retString += splitURI(object.value);
+		 }
+	 } else {
+		retString += val;
+	 }
+
+	 retString += "</div>";
 	 retString += "</div>";
 	}
 	return retString; 
@@ -112,7 +126,7 @@ function setObjectValue(predicate, object){
 	var val = object.value; 
 
 	if(object.type == "uri"){
-		console.log(object);
+		//console.log(object);
 	 	val = splitURI(val);
 	}
 	 return val;
@@ -152,3 +166,10 @@ function storeSubjectName(){
 
 	subjectHeader = splitURI(dbJson).split('.')[0];
 }
+
+function niceuri(uri) {
+	var uristr = uri;	
+	uristr = uristr.replace("dbpedia.imp.fu-berlin.de:49156","dbpedia.org");
+	return uristr;
+}
+
