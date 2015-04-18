@@ -4,17 +4,58 @@ var dbJson = "";
 var subjectHeader; 
 var loadingLabel = "<span class='loading'> loading ... </span>";
 var contentRdf; 
-jQuery(document).ready(function(){
+
+
+$(document).ready(function(){
+
+	if (window.location.href.split('#')[1]) {
+		jQuery('#rdfURI').val(window.location.href.split('#')[1]);
+		$("#readRdf").trigger("click");
+		
+	}
+
 	$("#readRdf").click(function(){
-		var input = jQuery('#rdfURI').val();
- 
+		var input = $('#rdfURI').val();
 		parseInput2DbJson(input); 	
 		readInputJson();
 	});
-	contentRdf = jQuery('#rdf');
+	contentRdf = $('#rdf');
+});
+
+
+/**
+ * Wikipedia search. 
+ * Looks up for articles on wikipedia api and sho them in result div.
+ * */
+$(document).on("keyup","#searchfield",function(){
+	var s = $("#searchfield").val();
+        $.getJSON("http://de.wikipedia.org/w/api.php?callback=?",
+        {
+          srsearch: s, action: "query", list: "search", format: "json"
+        },
+        function(data) {
+          $("#searchresults").empty();
+          $.each(data.query.search, function(i,item){
+            $("#searchresults").append('<div><a class="uriresult" href="#http://de.dbpedia.org/resource/' + item.title.replace(/ /g,"_") + '">' + item.title + '</a><br/>' + item.snippet + '</div>');
+          });
+ 
+ 	});
 
 });
 
+/**
+ * Wikipedia search result clicked. 
+ * loads uri in  input field and trigger readRdf click event
+ * */
+$(document).on("click",".uriresult",function(){
+	jQuery('#rdfURI').val($(this).attr("href").substr(1));
+	$("#readRdf").trigger("click");
+});
+
+
+$(document).on("click","#showfulluri",function(){
+	$("#readRdf").trigger("click");
+ });
 
 function parseInput2DbJson(input){
 	var inputArr = input.split("/"); 
@@ -104,10 +145,16 @@ function createContentDivs(subject, predicate){
 
 	 if (object.type=="uri") {
 		if($('#showfulluri').is(':checked')) {
-			retString += niceuri(object.value);
+			var uritoshow = niceuri(object.value);
 		 } else {
-			retString += splitURI(object.value);
+			var uritoshow = splitURI(object.value);
 		 }
+		if (object.value.search(".imp.fu-berlin.de")>0) {
+			retString += '<a class="uriresult" href="#'+niceuri(object.value)+'">'+uritoshow+'</a>';
+		} else {
+			retString += uritoshow;
+		}
+
 	 } else {
 		retString += val;
 	 }
@@ -172,4 +219,7 @@ function niceuri(uri) {
 	uristr = uristr.replace("dbpedia.imp.fu-berlin.de:49156","dbpedia.org");
 	return uristr;
 }
+
+
+
 

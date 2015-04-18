@@ -22,7 +22,7 @@
 	background-color:grey;
 }
 
-.uri {
+.uri, .uri a {
 	color: white;
 	background-color:blue;
 }

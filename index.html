@@ -4,7 +4,7 @@
 	<meta charset="UTF-8" />
 	 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
 	<meta name="author" content="Tobias Hahn, hahn-tobias@live.de"/>
-	<title>RDF Reader Page</title>
+	<title>Wikipedia Triple View</title>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script type="text/javascript" src="rdfReader.js" > </script>
 	<link href="style.css" rel="stylesheet" type="text/css" />
@@ -13,7 +13,14 @@
 	<![endif]-->
 </head>
 <body>
-<h1>The RDF Reader</h1>
+<h1>Wikipedia Triple View</h1>
+
+<b>Artikelsuche:</b><br/>
+
+<input id="searchfield" />
+
+<div id="searchresults"></div>
+
 <div id="content">
 	<form name="rdfReader" action="#" method="GET" accept-charset="UTF-8">
 		<input type="text" id="rdfURI"/>
