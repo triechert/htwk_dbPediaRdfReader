@@ -10,6 +10,8 @@ For example there are no links that point to the dbpedia-entity.
 
 It only parses the URI's or literals so that u can just see the valuable endings of it. This leads to more readability. 
 
+Try the script here: http://rawgit.com/triechert/htwk_dbPediaRdfReader/develop/index.html
+
 Also Wiki and DBPedia Links are parses: 
 ExampleURLs that are formatted right: 
 * http://de.dbpedia.org/data/Robert_Schuman.json
