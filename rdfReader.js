@@ -1,4 +1,6 @@
-var dbJsonBase = "http://de.dbpedia.org/data/";
+//var dbJsonBase = "http://de.dbpedia.org/data/";
+var dbJsonBase = "http://live.dbpedia.org/data/";
+
 var dbJsonSuffix = ".json"; 
 var dbJson = "";
 var subjectHeader; 
@@ -94,7 +96,7 @@ function clearRdf(){
  *
  * */
 function parseRdf(json){
-	contentRdf.html("<h2>The contents are: </h2> ");
+	contentRdf.html("<h2>Triples are: </h2> ");
 
 	for(property in json){
 		console.log(property);
@@ -185,7 +187,7 @@ function setObjectValue(predicate, object){
 function setLabel(pred, val){
 
 	 if(pred.indexOf("label") > -1){
-	 	jQuery('h2').html("The Contents of " + val + " are: ");
+	 	jQuery('h2').html("Triples of " + val + " are: ");
 	 }
 }
 
