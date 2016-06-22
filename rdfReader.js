@@ -1,4 +1,5 @@
-var dbJsonBase = "http://de.dbpedia.org/data/";
+var dbJsonBase = "http://dbpedia.org/data/";
+//var dbJsonBase = "http://de.dbpedia.org/data/";
 //var dbJsonBase = "http://live.dbpedia.org/data/";
 
 var dbJsonSuffix = ".json"; 
