@@ -1,4 +1,6 @@
 var dbJsonBase = "http://dbpedia.org/data/";
+var dbLang = "";
+
 //var dbJsonBase = "http://de.dbpedia.org/data/";
 //var dbJsonBase = "http://live.dbpedia.org/data/";
 
@@ -23,6 +25,13 @@ $(document).ready(function(){
 		readInputJson();
 	});
 	contentRdf = $('#rdf');
+	dbJsonBase = $("#sprache").val()+'/data/';
+	
+	if ($("#sprache").val()=="http://dbpedia.org") dbLang="";
+	if ($("#sprache").val()=="http://de.dbpedia.org") dbLang="de.";
+	if ($("#sprache").val()=="http://nl.dbpedia.org") dbLang="nl.";
+
+
 });
 
 
@@ -32,19 +41,32 @@ $(document).ready(function(){
  * */
 $(document).on("keyup","#searchfield",function(){
 	var s = $("#searchfield").val();
-        $.getJSON("http://de.wikipedia.org/w/api.php?callback=?",
+        $.getJSON("http://"+dbLang+"wikipedia.org/w/api.php?callback=?",
         {
           srsearch: s, action: "query", list: "search", format: "json"
         },
         function(data) {
           $("#searchresults").empty();
           $.each(data.query.search, function(i,item){
-            $("#searchresults").append('<div><a class="uriresult" href="#http://de.dbpedia.org/resource/' + item.title.replace(/ /g,"_") + '">' + item.title + '</a><br/>' + item.snippet + '</div>');
+            $("#searchresults").append('<div><a class="uriresult" href="#http://'+dbLang+'dbpedia.org/resource/' + item.title.replace(/ /g,"_") + '">' + item.title + '</a><br/>' + item.snippet + '</div>');
           });
  
  	});
 
 });
+
+/**
+ * Language version chanched. 
+ * 
+ * */
+$(document).on("click","#sprache",function(){
+	dbJsonBase = $("#sprache").val()+'/data/';
+	if ($("#sprache").val()=="http://dbpedia.org") dbLang="";
+	if ($("#sprache").val()=="http://de.dbpedia.org") dbLang="de.";
+	if ($("#sprache").val()=="http://nl.dbpedia.org") dbLang="nl.";
+
+ });
+
 
 /**
  * Wikipedia search result clicked. 
